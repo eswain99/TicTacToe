@@ -23,6 +23,8 @@ const winConditions = [
 const statusDisplay = document.getElementById("status");
 const controlButton = document.getElementById("controlButton");
 const cells = document.querySelectorAll(".cell");
+const waterfall = document.getElementById("waterfall");
+
 
 // -----------------------------
 // Utility functions
@@ -91,12 +93,19 @@ function checkWin() {
   for (let condition of winConditions) {
     const [a, b, c] = condition;
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      // Optional: highlight the winning line
       highlightWinningCells(condition);
+      triggerWaterfall(); // 💦 show waterfall
       return true;
     }
   }
   return false;
+}
+
+function triggerWaterfall() {
+  waterfall.style.opacity = "1";
+  setTimeout(() => {
+    waterfall.style.opacity = "0";
+  }, 3000);
 }
 
 function highlightWinningCells(indices) {
