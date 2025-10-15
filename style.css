@@ -1,155 +1,51 @@
-/* GENERAL LAYOUT */
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-  background: linear-gradient(180deg, #ff7f7f 0%, #ffb6b6 100%);
-  color: #fff;
+  font-family: sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  position: relative;
-}
-
-/* BACKGROUND SALMON SWIMMING */
-#background {
-  position: absolute;
-  top: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.salmon {
-  position: absolute;
-  bottom: 20%;
-  width: 80px;
-  height: 40px;
-  background: url('chinook-salmon.png') no-repeat center/contain;
-  animation: swim 18s linear infinite;
-  opacity: 0.8;
-}
-
-.salmon2 {
-  bottom: 50%;
-  animation-delay: 6s;
-  animation-duration: 22s;
-  transform: scale(0.9);
-}
-
-.salmon3 {
-  bottom: 30%;
-  animation-delay: 12s;
-  animation-duration: 26s;
-  transform: scale(1.2);
-}
-
-@keyframes swim {
-  0% {
-    left: -100px;
-    transform: scaleX(1);
-  }
-  49% {
-    transform: scaleX(1);
-  }
-  50% {
-    left: 100%;
-    transform: scaleX(-1);
-  }
-  99% {
-    transform: scaleX(-1);
-  }
-  100% {
-    left: -100px;
-    transform: scaleX(1);
-  }
-}
-
-/* WATERFALL SPLASH (hidden by default) */
-#waterfall {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 400px;
-  height: 300px;
-  background: url('il_340x270.6898790709_jf3h.jpg') no-repeat center/contain;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 5;
-  transition: opacity 1s ease-in-out;
-}
-
-/* GAME CONTAINER */
-#game-container {
-  z-index: 10;
-  text-align: center;
+  background: #f0f0f0;
 }
 
 h1 {
   margin-bottom: 10px;
-  text-shadow: 0 0 10px #ffffff88;
 }
 
-/* BOARD */
+#status {
+  margin: 10px;
+  font-size: 1.2em;
+}
+
 .board {
   display: grid;
-  grid-template-columns: repeat(3, 110px);
-  grid-template-rows: repeat(3, 110px);
-  gap: 10px;
-  justify-content: center;
-  margin: 20px 0;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
 }
 
 .cell {
-  background: radial-gradient(circle at top left, #ffffffcc, #ffcccc);
-  border-radius: 50%;
-  box-shadow: inset 0 0 15px #fff6f6, 0 4px 8px rgba(0,0,0,0.2);
+  background: white;
+  border: 2px solid #333;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2.5em;
-  color: #d33;
   cursor: pointer;
-  transition: transform 0.2s, background 0.3s;
+  transition: background 0.3s;
 }
 
 .cell:hover {
-  transform: scale(1.08);
-  background: radial-gradient(circle at bottom right, #ffffffee, #ffbbbb);
+  background: #eee;
 }
 
 .cell.win {
-  animation: bubbleGlow 1.5s infinite alternate;
-}
-
-@keyframes bubbleGlow {
-  from { box-shadow: 0 0 10px #fff, 0 0 20px #ff9; }
-  to { box-shadow: 0 0 25px #fff, 0 0 40px #ffd; }
-}
-
-/* STATUS AND BUTTON */
-#status {
-  font-size: 1.4em;
-  margin: 10px;
-  text-shadow: 0 0 5px #fff;
+  background: #90ee90;
 }
 
 button {
-  background: #fff;
-  border: none;
-  border-radius: 25px;
-  padding: 10px 25px;
+  margin-top: 20px;
+  padding: 10px 20px;
   font-size: 1em;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background: #ffeaea;
-  transform: scale(1.05);
 }
