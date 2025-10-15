@@ -38,7 +38,8 @@ function resetBoard() {
   board = ["", "", "", "", "", "", "", "", ""];
   cells.forEach(cell => {
     cell.textContent = "";
-    cell.classList.remove("win"); // optional visual cleanup
+    cell.classList.remove("win");
+    cell.classList.remove("disabled");
   });
 }
 
@@ -61,7 +62,8 @@ function handleCellClick(e) {
   // Ignore clicks if:
   // - game isn’t active
   // - cell is already taken
-  if (!gameActive || board[clickedIndex] !== "") return;
+  // - game already won
+  if (!gameActive || board[clickedIndex] !== "" || clickedCell.classList.contains("disabled") || checkWin()) return;
 
   // Place player's symbol
   board[clickedIndex] = currentPlayer;
@@ -93,19 +95,12 @@ function checkWin() {
   for (let condition of winConditions) {
     const [a, b, c] = condition;
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      highlightWinningCells(condition);
-      triggerWaterfall(); // 💦 show waterfall
-      return true;
+  highlightWinningCells(condition);
+  disableBoard();
+  return true;
     }
   }
   return false;
-}
-
-function triggerWaterfall() {
-  waterfall.style.opacity = "1";
-  setTimeout(() => {
-    waterfall.style.opacity = "0";
-  }, 3000);
 }
 
 function highlightWinningCells(indices) {
@@ -115,7 +110,17 @@ function highlightWinningCells(indices) {
 }
 
 function checkTie() {
-  return board.every(cell => cell !== "");
+  if (board.every(cell => cell !== "")) {
+    disableBoard();
+    return true;
+  }
+  return false;
+}
+
+function disableBoard() {
+  cells.forEach(cell => {
+    cell.classList.add("disabled");
+  });
 }
 
 // -----------------------------
